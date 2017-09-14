@@ -1,0 +1,27 @@
+.header {
+  overflow: hidden;
+
+  padding: 43px 0 23px;
+
+  @include breakpoint-tablet {
+    padding: 43px 0 23px;
+  }
+
+  &__menu {
+    float: left;
+
+    position: relative;
+    top: 15px;
+    left: 0;
+
+    width: 55px;
+    height: 55px;
+
+    @include breakpoint-mobile {
+      width: 40px;
+      height: auto;
+
+      top: 10px;
+    }
+  }
+}

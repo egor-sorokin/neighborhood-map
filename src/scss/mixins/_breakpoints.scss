@@ -1,0 +1,33 @@
+@mixin breakpoint($width) {
+  @media (max-width: $width) {
+    @content
+  }
+}
+
+//from $largeWidth + 1px to $extraLargeWidth
+@mixin breakpoint-desktop {
+  @include breakpoint($extraLargeWidth) {
+    @content
+  }
+}
+
+//from $mediumWidth + 1px to $largeWidth
+@mixin breakpoint-small-desktop {
+  @include breakpoint($largeWidth) {
+    @content
+  }
+}
+
+//from $smallWidth + 1px  to $mediumWidth
+@mixin breakpoint-tablet {
+  @include breakpoint($mediumWidth) {
+    @content
+  }
+}
+
+//from $extraSmallWidth + 1px to $smallWidth
+@mixin breakpoint-mobile {
+  @include breakpoint($smallWidth) {
+    @content
+  }
+}
