@@ -1,0 +1,11 @@
+.form {
+  display: flex;
+  flex-direction: row;
+
+  &__input-container {
+    flex-basis: 70%;
+  }
+  &__button-container {
+    flex-basis: 30%;
+  }
+}
