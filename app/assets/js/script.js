@@ -4,24 +4,49 @@
 
   var initialPlaces = [
     {
-      'name': 'Bar',
+      'place_id': 'ChIJ_f9-6SYGelMRaZ4lDCFImk4',
+      'title': 'Kootenay National Park',
+      'locations': {
+        'lat': 50.9769367,
+        'lng': -115.9592102
+      }
     },
     {
-      'name': 'Foo',
+      'place_id': 'ChIJyaLFSj48eVMRc4lvx8rhwJ0',
+      'title': 'Two Lakes In Revelstoke National Park',
+      'location': {
+        'lat': 51.0336631,
+        'lng': -118.1640469
+      }
     },
     {
-      'name': 'Foobar',
+      'place_id': 'ChIJlZGSjCtmd1MR5tfKrGjincA',
+      'title': 'Banff National Park',
+      'location': {
+        'lat': 51.4968464,
+        'lng': -115.9280562
+      }
     },
     {
-      'name': 'Barfoo',
+      'place_id': 'ChIJxWd-JkUIeVMRuQ7amxSgRPA',
+      'title': 'Glacier National Park of Canada',
+      'location': {
+        'lat': 51.335289,
+        'lng': -117.5297595
+      }
     },
     {
-      'name': 'Baz',
+      'place_id': 'ChIJv0mRixFDb1MRHFgDVHceYN8',
+      'title': 'Waterton Lakes National Park',
+      'location': {
+        'lat': 49.0833333,
+        'lng': -113.9166667
+      }
     }
   ];
 
   var Place = function (data) {
-    this.name = ko.observable(data.name);
+    this.title = ko.observable(data.title);
 
   };
 
@@ -42,7 +67,7 @@
       self.placesList([]);
 
       initialPlaces.forEach(function (i) {
-        if (i.name.toLowerCase().indexOf(inputVal) !== -1) {
+        if (i.title.toLowerCase().indexOf(inputVal) !== -1) {
           self.placesList.push(new Place(i));
         }
       });
