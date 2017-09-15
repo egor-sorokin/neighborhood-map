@@ -1,9 +1,29 @@
 .sidebar {
+  display: flex;
+  flex-shrink: 0;
+
+  width: 318px;
+  height: 100%;
+
   border-right: 2px solid #000;
 
+  @include breakpoint-tablet {
+    //display: none;
+  }
+  @include breakpoint-mobile {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    max-width: 318px;
+    width: 100%;
+
+    z-index: 1;
+  }
+
   &__content {
-    width: 340px;
     height: 100%;
+    width: 100%;
 
     background-color: #3b383b;
 
@@ -22,5 +42,4 @@
   &__list {
 
   }
-
 }

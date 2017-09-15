@@ -23,37 +23,39 @@
     <link rel="stylesheet" href="assets/css/style.min.css">
 </head>
 <body>
-
-<header class="header">
-    <section class="header__menu">
-        <p class="header__menu">Menu</p>
-    </section>
-</header>
 <div class="wrapper">
-    <aside class="sidebar js-sidebar">
-        <div class="sidebar__content">
-            <h1 class="sidebar__title">Find Your Omsk Home</h1>
-            <div class="sidebar__form form">
-                <div class="form__input-container">
-                    <input class="input" placeholder="">
+    <header class="header">
+        <section class="header__menu">
+            <p class="header__menu">Menu</p>
+        </section>
+    </header>
+    <div class="content">
+        <aside class="sidebar js-sidebar">
+            <div class="sidebar__content">
+                <h1 class="sidebar__title">Find Your Omsk Home</h1>
+                <div class="sidebar__form form">
+                    <div class="form__input-container">
+                        <input class="input" placeholder="">
+                    </div>
+                    <div class="form__button-container">
+                        <button id="show-listings" class="button">Filter</button>
+                    </div>
+                    <!--<button type="button" id="hide-listings" class="button">Hide Listings</button>-->
+                    <!--<hr/>-->
+                    <!--<span class="text">Draw a shape to search within it for party</span>-->
+                    <!--<button type="button" id="toggle-drawing">Drawing Tool</button>-->
                 </div>
-                <div class="form__button-container">
-                    <button id="show-listings" class="button">Filter</button>
-                </div>
-                <!--<button type="button" id="hide-listings" class="button">Hide Listings</button>-->
-                <!--<hr/>-->
-                <!--<span class="text">Draw a shape to search within it for party</span>-->
-                <!--<button type="button" id="toggle-drawing">Drawing Tool</button>-->
+                <ul class="sidebar__list list">
+                    <li class="list__item">asd</li>
+                </ul>
             </div>
-            <ul class="sidebar__list list">
-                <li class="list__item">asd</li>
-            </ul>
-        </div>
-    </aside>
-    <main class="main">
-        <div id="map" class="map"></div>
-    </main>
+        </aside>
+        <main class="main">
+            <div id="map" class="map"></div>
+        </main>
+    </div>
 </div>
+
 
 <script>
   var map;
