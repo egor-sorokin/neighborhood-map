@@ -33,20 +33,20 @@
         <aside class="sidebar js-sidebar">
             <div class="sidebar__content">
                 <h1 class="sidebar__title">Find Your Omsk Home</h1>
-                <div class="sidebar__form form">
+                <div class="sidebar__form form js-form">
                     <div class="form__input-container">
                         <input class="input" placeholder="">
                     </div>
                     <div class="form__button-container">
-                        <button id="show-listings" class="button">Filter</button>
+                        <button id="show-listings" class="button" data-bind="click: filter">Filter</button>
                     </div>
                     <!--<button type="button" id="hide-listings" class="button">Hide Listings</button>-->
                     <!--<hr/>-->
                     <!--<span class="text">Draw a shape to search within it for party</span>-->
                     <!--<button type="button" id="toggle-drawing">Drawing Tool</button>-->
                 </div>
-                <ul class="sidebar__list list">
-                    <li class="list__item">asd</li>
+                <ul class="sidebar__list list js-list" data-bind="foreach: placesList">
+                    <li class="list__item" data-bind="text: name, click: $parent.setCurrentPlace"></li>
                 </ul>
             </div>
         </aside>
@@ -312,6 +312,8 @@
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing&key=AIzaSyA06zneEbM7ThTAoisy3cXHfuzRzRUHZSE&callback=initMap"
         async defer></script>
+<script src="../node_modules/knockout/build/output/knockout-latest.js"></script>
+<script src="assets/js/script.js"></script>
 
 </body>
 </html>
