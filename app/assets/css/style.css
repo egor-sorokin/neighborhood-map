@@ -84,8 +84,7 @@ hr {
 .button {
   width: 100%;
   padding: 10px 20px;
-  border: 2px solid #000;
-  background-color: #3b383b;
+  background-color: #CA9BD2;
   font-size: 18px;
   color: #fff;
   cursor: pointer;
@@ -114,7 +113,7 @@ body {
 
 .header {
   overflow: hidden;
-  padding: 33px 0;
+  padding: 20px 0;
   background-color: #3b383b;
   border-bottom: 2px solid #000; }
   .header__menu {
@@ -161,10 +160,24 @@ body {
   height: 100%; }
 
 .sidebar {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  width: 318px;
+  height: 100%;
   border-right: 2px solid #000; }
+  @media (max-width: 599px) {
+    .sidebar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      max-width: 318px;
+      width: 100%;
+      z-index: 1; } }
   .sidebar__content {
-    width: 340px;
     height: 100%;
+    width: 100%;
     background-color: #3b383b;
     text-align: left; }
   .sidebar__title {
@@ -180,7 +193,17 @@ body {
 .wrapper {
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  min-height: 100vh;
+  height: 100%; }
+
+.content {
+  display: -ms-flexbox;
+  display: flex;
   -ms-flex-direction: row;
       flex-direction: row;
-  min-height: 100%;
   height: 100%; }
+  @media (max-width: 959px) {
+    .content {
+      position: relative; } }
