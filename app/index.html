@@ -14,6 +14,7 @@
             width: 200px;
             height: 200px;
         }
+
         #toggle-drawing {
             width: 32%;
             position: relative;
@@ -46,7 +47,7 @@
                     <!--<button type="button" id="toggle-drawing">Drawing Tool</button>-->
                 </div>
                 <ul class="sidebar__list list js-list" data-bind="foreach: placesList">
-                    <li class="list__item" data-bind="text: name, click: $parent.setCurrentPlace"></li>
+                    <li class="list__item" data-bind="text: title, click: $parent.setCurrentPlace"></li>
                 </ul>
             </div>
         </aside>
@@ -56,9 +57,14 @@
     </div>
 </div>
 
-
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
+
+  'use strict';
+
+  var $ = jQuery;
   var map;
+  var defaultMarkerIcon, highlightedMarkerIcon;
   var markers = [];
   var locations = [];
   var styles = [];
@@ -153,8 +159,8 @@
     });
 
     var largeInfowindow = new google.maps.InfoWindow();
-    var defaultIcon = makeMarkerIcon('0091ff');
-    var highlightedIcon = makeMarkerIcon('f3d19c');
+    defaultMarkerIcon = makeMarkerIcon('0091ff');
+    highlightedMarkerIcon = makeMarkerIcon('f3d19c');
 
 
     var drawingManager = new google.maps.drawing.DrawingManager({
@@ -177,19 +183,14 @@
         id: i,
         draggable: true,
         animation: google.maps.Animation.DROP,
-        icon: defaultIcon
+        icon: defaultMarkerIcon
       });
 
       markers.push(marker);
 
       marker.addListener('click', function () {
+        this.setIcon(highlightedMarkerIcon);
         populateInfoWindow(this, largeInfowindow);
-      });
-      marker.addListener('mouseover', function () {
-        this.setIcon(highlightedIcon);
-      });
-      marker.addListener('mouseout', function () {
-        this.setIcon(defaultIcon);
       });
     }
 
@@ -228,6 +229,7 @@
 
       infowindow.addListener('closeclick', function () {
         infowindow.marker = null;
+        marker.setIcon(defaultMarkerIcon);
       });
 
       var streetViewService = new google.maps.StreetViewService();
