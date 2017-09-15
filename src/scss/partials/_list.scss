@@ -1,0 +1,22 @@
+.list {
+  display: flex;
+  flex-direction: column;
+
+  &__item {
+    padding: 15px 25px;
+
+    font-size: 18px;
+    color: #fff;
+
+    cursor: pointer;
+
+    transition: background-color 0.5s ease,
+    color 0.5s ease;
+
+    &:hover {
+      color: #9B9B9B;
+
+      background-color: #000;
+    }
+  }
+}

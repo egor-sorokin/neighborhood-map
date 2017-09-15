@@ -5,108 +5,57 @@
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     <style>
-        html,
-        body {
-            font-family: Arial, sans-serif;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-
         .container {
             height: 100%;
             position: relative;
-        }
-
-        input {
-            font-size: 12px;
-        }
-
-        h1 {
-            color: #525454;
-            font-size: 22px;
-            margin: 0 0 10px 0;
-            text-align: center;
-        }
-
-        #hide-listings,
-        #show-listings {
-            width: 48%;
-        }
-
-        hr {
-            background: #D0D7D9;
-            height: 1px;
-            margin: 20px 0 20px 0;
-            border: none;
-        }
-
-        #map {
-            bottom: 0px;
-            height: 100%;
-            left: 362px;
-            position: absolute;
-            right: 0px;
-        }
-
-        .sidebar__content {
-            background: #fff;
-            border: 1px solid #999;
-            border-radius: 3px;
-            height: 100%;
-            line-height: 35px;
-            padding: 10px 10px 30px 10px;
-            text-align: left;
-            width: 340px;
         }
 
         #pano {
             width: 200px;
             height: 200px;
         }
-
-        .text {
-            font-size: 12px;
-        }
-
         #toggle-drawing {
             width: 32%;
             position: relative;
             margin-left: 10px;
         }
     </style>
+    <link rel="stylesheet" href="assets/css/style.min.css">
 </head>
 <body>
-<header class="header">
-    <section class="header__menu">
-        <div class="header__menu-icon icon icon--hamburger"></div>
-        <div class=" sidebar js-sidebar">
+<div class="wrapper">
+    <header class="header">
+        <section class="header__menu">
+            <p class="header__menu">Menu</p>
+        </section>
+    </header>
+    <div class="content">
+        <aside class="sidebar js-sidebar">
             <div class="sidebar__content">
                 <h1 class="sidebar__title">Find Your Omsk Home</h1>
-                <div class="form">
+                <div class="sidebar__form form">
                     <div class="form__input-container">
                         <input class="input" placeholder="">
                     </div>
                     <div class="form__button-container">
-                        <button id="show-listings" class="button">Show Listings</button>
+                        <button id="show-listings" class="button">Filter</button>
                     </div>
                     <!--<button type="button" id="hide-listings" class="button">Hide Listings</button>-->
                     <!--<hr/>-->
                     <!--<span class="text">Draw a shape to search within it for party</span>-->
                     <!--<button type="button" id="toggle-drawing">Drawing Tool</button>-->
                 </div>
-                <ul class="list">
-                    <li class="list__item">asd</li>
-                    <li class="list__item">asd</li>
+                <ul class="sidebar__list list">
                     <li class="list__item">asd</li>
                 </ul>
             </div>
-        </div>
-    </section>
-</header>
-<main class="main">
-    <div id="map"></div>
-</main>
+        </aside>
+        <main class="main">
+            <div id="map" class="map"></div>
+        </main>
+    </div>
+</div>
+
 
 <script>
   var map;
