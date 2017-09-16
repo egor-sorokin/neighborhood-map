@@ -1,4 +1,4 @@
-;(function () {
+;(function ($) {
   'use strict';
 
   var initialPlaces = [
@@ -51,18 +51,21 @@
 
   var ViewModel = function () {
     var self = this;
-    var input = document.querySelector('.js-form input');
-
+    self.filterInput = document.querySelector('.js-form input');
+    self.sidebarActiveClass = 'active';
     self.placesList = ko.observableArray([]);
+
 
     initialPlaces.forEach(function (i) {
       self.placesList.push(new Place(i));
     });
 
+
     self.currentPlace = ko.observable(self.placesList()[0]);
 
+
     self.filter = function () {
-      var inputVal = input.value;
+      var inputVal = self.filterInput.value;
       self.placesList([]);
 
       initialPlaces.forEach(function (i) {
@@ -72,10 +75,55 @@
       });
     };
 
-    self.setCurrentPlace = function (clickedPlace) {
+
+    self.setCurrentPlace = function (clickedPlace, event) {
       self.currentPlace(clickedPlace);
+      var _elem = event.target;
+      var _parent = _elem.parentNode;
+      var _description = _elem.nextElementSibling;
+      var _allDescriptions = document.querySelectorAll('.list__item-description');
+
+
+      for (var i = 0; i < _allDescriptions.length; i++) {
+        if (_allDescriptions[i] !== _description) {
+          _allDescriptions[i].parentNode.classList.remove(self.sidebarActiveClass);
+        }
+        _allDescriptions[i].innerHTML = '';
+      }
+
+      var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + clickedPlace.title() + '&format=json&callback=wikiCallback';
+
+      var wikiRequestTimeout = setTimeout(function () {
+        _description.innerHTML = '';
+        _description.innerHTML += 'Failed to get wikipedia resources';
+        _parent.classList.add(self.sidebarActiveClass);
+      }, 5000);
+
+      $.ajax({
+        url: wikiUrl,
+        dataType: 'jsonp',
+        jsonp: 'callback',
+        success: function (response) {
+          var description = response[2];
+
+          if (description.length !== 0) {
+            _description.innerHTML += description;
+          } else {
+            _description.innerHTML += 'Description not found';
+          }
+
+          _parent.classList.add(self.sidebarActiveClass);
+
+          clearTimeout(wikiRequestTimeout);
+        },
+        error: function (error) {
+          _description.innerHTML += 'Something went wrong';
+
+          console.log('Request returned an error: ', error);
+        }
+      });
     };
   };
 
   ko.applyBindings(new ViewModel());
-})();
+})(jQuery);
