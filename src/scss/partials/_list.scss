@@ -3,20 +3,39 @@
   flex-direction: column;
 
   &__item {
-    padding: 15px 25px;
+    &-text {
+      padding: 15px 25px;
 
-    font-size: 18px;
-    color: #fff;
+      font-size: 18px;
+      color: #fff;
 
-    cursor: pointer;
+      transition: background-color 0.5s ease,
+      color 0.5s ease;
 
-    transition: background-color 0.5s ease,
-    color 0.5s ease;
+      cursor: pointer;
 
-    &:hover {
+      &:hover {
+        background-color: #2a2a2a;
+
+        color: #9B9B9B;
+      }
+    }
+    &-description {
+      font-size: 14px;
+      color: #c2c2c2;
+    }
+
+    &.active {
+      background-color: #2a2a2a;
+
       color: #9B9B9B;
 
-      background-color: #000;
+      .list__item-description {
+        opacity: 1;
+        visibility: visible;
+
+        padding: 15px;
+      }
     }
   }
 }
