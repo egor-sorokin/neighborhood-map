@@ -137,15 +137,25 @@ body {
   display: flex;
   -ms-flex-direction: column;
       flex-direction: column; }
-  .list__item {
+  .list__item-text {
     padding: 15px 25px;
     font-size: 18px;
     color: #fff;
-    cursor: pointer;
-    transition: background-color 0.5s ease, color 0.5s ease; }
-    .list__item:hover {
-      color: #9B9B9B;
-      background-color: #000; }
+    transition: background-color 0.5s ease, color 0.5s ease;
+    cursor: pointer; }
+    .list__item-text:hover {
+      background-color: #2a2a2a;
+      color: #9B9B9B; }
+  .list__item-description {
+    font-size: 14px;
+    color: #c2c2c2; }
+  .list__item.active {
+    background-color: #2a2a2a;
+    color: #9B9B9B; }
+    .list__item.active .list__item-description {
+      opacity: 1;
+      visibility: visible;
+      padding: 15px; }
 
 .main {
   position: relative;

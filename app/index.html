@@ -47,7 +47,10 @@
                     <!--<button type="button" id="toggle-drawing">Drawing Tool</button>-->
                 </div>
                 <ul class="sidebar__list list js-list" data-bind="foreach: placesList">
-                    <li class="list__item" data-bind="text: title, click: $parent.setCurrentPlace"></li>
+                    <li class="list__item" data-bind="click: $parent.setCurrentPlace">
+                        <div class="list__item-text" data-bind="text: title"></div>
+                        <div class="list__item-description"></div>
+                    </li>
                 </ul>
             </div>
         </aside>
@@ -63,6 +66,7 @@
   'use strict';
 
   var $ = jQuery;
+
   var map;
   var defaultMarkerIcon, highlightedMarkerIcon;
   var markers = [];
