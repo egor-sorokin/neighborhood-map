@@ -4,7 +4,7 @@
   "es5": true,
   "esnext": true,
   "bitwise": true,
-  "camelcase": true,
+  "camelcase": false,
   "curly": true,
   "eqeqeq": true,
   "immed": true,
@@ -14,14 +14,16 @@
   "noarg": true,
   "quotmark": "single",
   "regexp": true,
-  "undef": true,
-  "unused": true,
+  "undef": false,
+  "unused": false,
   "strict": true,
   "trailing": false,
   "smarttabs": true,
   "globals" : {
     "jQuery": true,
     "Modernizr": true,
-    "ko": true
+    "ko": true,
+    "initMap": true,
+    "ViewModel": true
   }
 }
