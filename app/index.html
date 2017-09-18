@@ -22,15 +22,15 @@
                         <input class="input" placeholder="" data-bind="value: filterInput">
                     </div>
                     <div class="form__button-container">
-                        <!--<button id="show-listings" class="button" data-bind="click: filter">Filter</button>-->
+                        <button class="button" data-bind="click: filter">Filter</button>
                         <!--<button id="show-listings" class="button" data-bind="click: click: filterMarkers">Filter</button>-->
                     </div>
                     <!--<button type="button" id="hide-listings" class="button">Hide Listings</button>-->
                 </div>
                 <ul class="sidebar__list list js-list" data-bind="foreach: placesList">
-                    <li class="list__item" data-bind="">
-                        <div class="list__item-text" data-bind="text: title"></div>
-                        <div class="list__item-description"></div>
+                    <li class="list__item" data-bind="css: { 'active': itemActive() }">
+                        <div class="list__item-text" data-bind="text: title, click: $parent.setCurrentPlace"></div>
+                        <div class="list__item-description" data-bind="text: description"></div>
                     </li>
                 </ul>
             </div>
@@ -44,26 +44,26 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
 
-//  var map;
-//  var markers = [];
-//  var locations = [];
-//  var polygon = null;
-//
-//  function initMap() {
-//    document.getElementById('show-listings').addEventListener('click', showListings);
-////    document.getElementById('hide-listings').addEventListener('click', hideListings);
-//
-//
-//  function hideListings() {
-//    for (var i = 0; i < markers.length; i++) {
-//      markers[i].setMap(null);
-//    }
-//  }
+  //  var map;
+  //  var markers = [];
+  //  var locations = [];
+  //  var polygon = null;
+  //
+  //  function initMap() {
+  //    document.getElementById('show-listings').addEventListener('click', showListings);
+  ////    document.getElementById('hide-listings').addEventListener('click', hideListings);
+  //
+  //
+  //  function hideListings() {
+  //    for (var i = 0; i < markers.length; i++) {
+  //      markers[i].setMap(null);
+  //    }
+  //  }
 
 
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing&key=AIzaSyA06zneEbM7ThTAoisy3cXHfuzRzRUHZSE&callback=initMap"
-async defer></script>
+        async defer></script>
 <script src="../node_modules/knockout/build/output/knockout-latest.js"></script>
 
 <script src="assets/js/google-map.js"></script>
