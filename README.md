@@ -1,5 +1,5 @@
 
-In the project root directory type next command:
+In the project root directory type next commands:
 
 ```
 npm install
