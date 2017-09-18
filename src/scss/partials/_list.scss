@@ -21,6 +21,8 @@
       }
     }
     &-description {
+      display: none;
+
       font-size: 14px;
       color: #c2c2c2;
     }
@@ -31,8 +33,7 @@
       color: #9B9B9B;
 
       .list__item-description {
-        opacity: 1;
-        visibility: visible;
+        display: block;
 
         padding: 15px;
       }
