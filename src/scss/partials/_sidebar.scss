@@ -39,7 +39,8 @@
     display: flex;
     flex-direction: row;
   }
-  &__list {
-
+  &__list {}
+  &.hide {
+    display: none;
   }
 }
