@@ -15,25 +15,24 @@
     </header>
 
     <div class="content">
-        <aside class="sidebar js-sidebar" data-bind="css: { 'hide': toggleSidebar() }">
+        <aside class="sidebar" data-bind="css: { 'hide': toggleSidebar() }">
             <div class="sidebar__content">
-                <div>
-                    <div class="sidebar__form form js-form">
-                        <div class="form__input-container">
-                            <input class="input" placeholder="Type something" data-bind="value: filterInput">
-                        </div>
-                        <div class="form__button-container">
-                            <button class="button" data-bind="click: filterPlacesList">Filter</button>
-                        </div>
+                <div class="sidebar__form form">
+                    <div class="form__input-container">
+                        <input class="input" placeholder="Filter value..." data-bind="value: filterInput">
                     </div>
-                    <ul id="sidebar__list list" data-bind="foreach: placesListVisible">
-                        <li class="list__item" data-bind="css: { 'active': itemActive() }, click: $parent.showPlaceDescription">
-                            <div class="list__item-title" data-bind="text: title"></div>
-                            <div class="list__item-description" data-bind="text: description"></div>
-                        </li>
-                    </ul>
+                    <div class="form__button-container">
+                        <button class="button" data-bind="click: filterPlacesList">Filter</button>
+                    </div>
                 </div>
-                <div id="request-error-message" class="error-message"></div>
+                <ul class="sidebar__list list" data-bind="foreach: placesListVisible">
+                    <li class="list__item"
+                        data-bind="css: { 'active': itemActive() }, click: $parent.showPlaceDescription">
+                        <div class="list__item-title" data-bind="text: title"></div>
+                        <div class="list__item-description" data-bind="text: description"></div>
+                    </li>
+                </ul>
+                <p id="request-error-message" class="error-message"></p>
             </div>
         </aside>
 
@@ -43,12 +42,14 @@
     </div>
 </div>
 
+<!-- 3rd party libraries -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="../node_modules/knockout/build/output/knockout-latest.js"></script>
 
+<!-- Implementation of that project -->
 <script src="assets/js/script.js"></script>
-<script src="assets/js/google-map.js"></script>
 
+<!-- Google maps -->
 <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing&key=AIzaSyA06zneEbM7ThTAoisy3cXHfuzRzRUHZSE&callback=app.initMap"
         async defer></script>
 
