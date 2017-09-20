@@ -311,6 +311,7 @@ var app = {} || app;
           google.maps.event.addListener(place.marker, 'click', function () {
             self.updateDescriptionVisibility(place);
             self.populateInfoWindow(this, infowindow, place);
+            place.marker.setAnimation(google.maps.Animation.DROP);
             map.setCenter(place.marker.getPosition());
           });
         },
