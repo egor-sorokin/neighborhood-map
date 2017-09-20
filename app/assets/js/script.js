@@ -220,10 +220,8 @@ var app = {} || app;
 
 
     self.sidebarActiveClass = 'active';
-    self.googleMap = map;
     self.filterInput = ko.observable('');
     self.placesList = ko.observableArray([]);
-    self.filterInput = ko.observable('');
     self.visiblePlacesList = ko.observableArray();
     self.toggleSidebar = ko.observable(false);
 
@@ -251,7 +249,8 @@ var app = {} || app;
 
       place.marker = marker;
 
-      var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + place.title() + '&format=json&callback=wikiCallback';
+      var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search='
+        + place.title() + '&format=json&callback=wikiCallback';
 
       // Request description of each place through Wikipedia API
       $.ajax({
