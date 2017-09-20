@@ -13,6 +13,7 @@ var app = {} || app;
     mapContainer = document.getElementById('map');
 
     // styles for map
+    // reference https://developers.google.com/maps/documentation/javascript/styling
     mapStyles = [{
       elementType: 'geometry',
       stylers: [{
@@ -201,28 +202,12 @@ var app = {} || app;
     var infowindow = new google.maps.InfoWindow();
     var marker;
     var defaultMarkerIconColor;
+    var errorMessageContainer = document.getElementById('request-error-message');
 
 
-    // Create custom marker icon
-    function makeMarkerIcon(markerColor) {
-      var markerImage = new google.maps.MarkerImage(
-        'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|' + markerColor +
-        '|40|_|%E2%80%A2',
-        new google.maps.Size(21, 34),
-        new google.maps.Point(0, 0),
-        new google.maps.Point(10, 34),
-        new google.maps.Size(21, 34));
-
-      return markerImage;
-    }
-
-    defaultMarkerIconColor = makeMarkerIcon('0091ff');
-
-
-    self.sidebarActiveClass = 'active';
     self.filterInput = ko.observable('');
     self.placesList = ko.observableArray([]);
-    self.visiblePlacesList = ko.observableArray();
+    self.placesListVisible = ko.observableArray();
     self.toggleSidebar = ko.observable(false);
 
 
@@ -232,10 +217,70 @@ var app = {} || app;
     });
 
 
-    // Initially all markers are visible
+    // Fill the places array with visible markers, by default all of them is visible
     self.placesList().forEach(function (place) {
-      self.visiblePlacesList.push(place);
+      self.placesListVisible.push(place);
     });
+
+
+    // Create a custom marker icon
+    self.makeMarkerIcon = function (markerColor) {
+      var markerImage = new google.maps.MarkerImage(
+        'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|' + markerColor +
+        '|40|_|%E2%80%A2',
+        new google.maps.Size(21, 34),
+        new google.maps.Point(0, 0),
+        new google.maps.Point(10, 34),
+        new google.maps.Size(21, 34));
+
+      return markerImage;
+    };
+
+    defaultMarkerIconColor = self.makeMarkerIcon('0091ff');
+
+
+    // Set content to infowindow and open it
+    self.populateInfoWindow = function (marker, infowindow, place) {
+      if (infowindow.marker !== marker) {
+        infowindow.marker = marker;
+
+        infowindow.addListener('closeclick', function () {
+          infowindow.marker = null;
+          place.itemActive(false);
+        });
+
+        var streetViewService = new google.maps.StreetViewService();
+        var radius = 50;
+
+        function getStreetView(data, status) {
+          if (status === google.maps.StreetViewStatus.OK) {
+            var nearStreetViewLocation = data.location.latLng;
+            var heading = google.maps.geometry.spherical.computeHeading(nearStreetViewLocation, marker.position);
+
+            infowindow.setContent('<div class="info-window">' +
+              '<div class="info-window__title">' + place.title() + '</div>' +
+              '<div id="pano" class="info-window__view"></div></div>');
+
+            var panoramaOptions = {
+              position: nearStreetViewLocation,
+              pov: {
+                heading: heading,
+                pitch: 30
+              }
+            };
+            var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions);
+          } else {
+            infowindow.setContent('<div class="info-window">' +
+              '<h3 class="info-window__title">' + place.title() + '</h3>' +
+              '<div>No Street View Found</div></div>');
+          }
+        }
+
+        streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
+
+        infowindow.open(map, marker);
+      }
+    };
 
 
     // Add a description, a marker and a click event handler to each place
@@ -249,10 +294,10 @@ var app = {} || app;
 
       place.marker = marker;
 
-      var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search='
-        + place.title() + '&format=json&callback=wikiCallback';
+      var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' +
+        place.title() + '&format=json&callback=wikiCallback';
 
-      // Request description of each place through Wikipedia API
+      // Request a description of each place through Wikipedia API
       $.ajax({
         url: wikiUrl,
         dataType: 'jsonp',
@@ -262,32 +307,32 @@ var app = {} || app;
 
           place.description(description);
 
-          var infowindowContent = '<div class="info-window">' +
-            '<h4 class="info-window__title">' + place.title() + '</h4>' +
-            '<p class="info-window__description">' + place.description() + '</p></div>';
-
+          // Add handler for click event on a marker
           google.maps.event.addListener(place.marker, 'click', function () {
-            infowindow.open(map, this);
-            this.setAnimation(google.maps.Animation.DROP);
-            infowindow.setContent(infowindowContent);
+            self.updateDescriptionVisibility(place);
+            self.populateInfoWindow(this, infowindow, place);
             map.setCenter(place.marker.getPosition());
           });
         },
         error: function () {
-          infowindow.setContent('<p>Failed to get Wikipedia resources</p>');
-          document.getElementById('error-message').innerHTML = '<p>Failed to get Wikipedia resources</p>';
+          errorMessageContainer.innerHTML = 'Failed to get Wikipedia resources';
         }
       });
     });
 
 
-    // Handler for showing place description
-    self.showPlaceDescription = function (place) {
-      google.maps.event.trigger(place.marker, 'click');
-
-      ko.utils.arrayForEach(self.visiblePlacesList(), function (item) {
+    // Show the description of an active place only
+    self.updateDescriptionVisibility = function (place) {
+      ko.utils.arrayForEach(self.placesListVisible(), function (item) {
         item.itemActive(item.placeId() === place.placeId());
       });
+    };
+
+
+    // Show a place description on the marker and in the sidebar
+    self.showPlaceDescription = function (place, fromMarker) {
+      google.maps.event.trigger(place.marker, 'click');
+      self.updateDescriptionVisibility(place);
     };
 
 
@@ -302,20 +347,20 @@ var app = {} || app;
 
 
     // Filter all markers and places, remove all of them and then re-push only visible ones
-    self.filterMarkers = function () {
-      var searchInput = self.filterInput().toLowerCase();
+    self.filterPlacesList = function () {
+      var filterInput = self.filterInput().toLowerCase();
 
-      self.visiblePlacesList.removeAll();
+      self.placesListVisible.removeAll();
 
       self.placesList().forEach(function (place) {
         place.marker.setVisible(false);
 
-        if (place.title().toLowerCase().indexOf(searchInput) !== -1) {
-          self.visiblePlacesList.push(place);
+        if (place.title().toLowerCase().indexOf(filterInput) !== -1) {
+          self.placesListVisible.push(place);
         }
       });
 
-      self.visiblePlacesList().forEach(function (place) {
+      self.placesListVisible().forEach(function (place) {
         place.marker.setVisible(true);
       });
     };
