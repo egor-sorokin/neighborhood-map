@@ -12,8 +12,8 @@ var app = {} || app;
 
     mapContainer = document.getElementById('map');
 
-    // styles for map
-    // reference https://developers.google.com/maps/documentation/javascript/styling
+    // Styles for map
+    // Reference https://developers.google.com/maps/documentation/javascript/styling
     mapStyles = [{
       elementType: 'geometry',
       stylers: [{
@@ -126,7 +126,7 @@ var app = {} || app;
       }
     ];
 
-    // map initialising
+    // Map initialising
     map = new google.maps.Map(mapContainer, {
       center: {
         lat: 50.467859,
@@ -137,7 +137,7 @@ var app = {} || app;
       styles: mapStyles
     });
 
-    // default set of locations
+    // Default set of locations
     var locations = [{
       place_id: 'ChIJ_f9-6SYGelMRaZ4lDCFImk4',
       title: 'Kootenay National Park',
