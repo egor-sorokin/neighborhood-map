@@ -199,6 +199,8 @@ body {
     display: flex;
     -ms-flex-direction: row;
         flex-direction: row; }
+  .sidebar.hide {
+    display: none; }
 
 .pano {
   width: 200px;
@@ -221,3 +223,8 @@ body {
   @media (max-width: 959px) {
     .content {
       position: relative; } }
+
+.error-message {
+  padding: 25px;
+  color: #c44349;
+  font-size: 16px; }

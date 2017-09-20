@@ -22,8 +22,6 @@
   "globals" : {
     "jQuery": true,
     "Modernizr": true,
-    "ko": true,
-    "initMap": true,
-    "ViewModel": true
+    "app": true
   }
 }
