@@ -26,7 +26,7 @@
                             <button class="button" data-bind="click: filterPlacesList">Filter</button>
                         </div>
                     </div>
-                    <ul id="sidebar__list list" data-bind="foreach: visiblePlacesList">
+                    <ul id="sidebar__list list" data-bind="foreach: placesListVisible">
                         <li class="list__item" data-bind="css: { 'active': itemActive() }, click: $parent.showPlaceDescription">
                             <div class="list__item-title" data-bind="text: title"></div>
                             <div class="list__item-description" data-bind="text: description"></div>
