@@ -1,4 +1,8 @@
 .sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+
   display: flex;
   flex-shrink: 0;
 
@@ -7,8 +11,10 @@
 
   border-right: 2px solid #000;
 
+  z-index: 3;
+
   @include breakpoint-tablet {
-    //display: none;
+    display: none;
   }
   @include breakpoint-mobile {
     position: absolute;
@@ -41,7 +47,7 @@
   }
   &__list {}
 
-  &.hide {
-    display: none;
+  &.show {
+    display: block;
   }
 }

@@ -186,6 +186,12 @@ var app = {} || app;
   };
 
 
+  // Error function to handle that loading of map was failed
+  app.mapError = function () {
+    document.getElementById('map').innerHTML = '<h3>Can not load the map. Please reload the page, or try again later</h3>';
+  };
+
+
   // Place - a description of each place instance
   var Place = function (data) {
     this.placeId = ko.observable(data.place_id);
@@ -202,24 +208,18 @@ var app = {} || app;
     var infowindow = new google.maps.InfoWindow();
     var marker;
     var defaultMarkerIconColor;
-    var errorMessageContainer = document.getElementById('request-error-message');
 
 
     self.filterInput = ko.observable('');
     self.placesList = ko.observableArray([]);
     self.placesListVisible = ko.observableArray();
     self.toggleSidebar = ko.observable(false);
+    self.errorMessage = ko.observable('');
 
 
     // Fill the places array
     locations.forEach(function (i) {
       self.placesList.push(new Place(i));
-    });
-
-
-    // Fill the places array with visible markers, by default all of them is visible
-    self.placesList().forEach(function (place) {
-      self.placesListVisible.push(place);
     });
 
 
@@ -252,7 +252,7 @@ var app = {} || app;
         var streetViewService = new google.maps.StreetViewService();
         var radius = 50;
 
-        var getStreetView = function(data, status) {
+        var getStreetView = function (data, status) {
           if (status === google.maps.StreetViewStatus.OK) {
             var nearStreetViewLocation = data.location.latLng;
             var heading = google.maps.geometry.spherical.computeHeading(nearStreetViewLocation, marker.position);
@@ -316,7 +316,7 @@ var app = {} || app;
           });
         },
         error: function () {
-          errorMessageContainer.innerHTML = 'Failed to get Wikipedia resources';
+          self.errorMessage('Failed to get Wikipedia resources');
         }
       });
     });
@@ -339,32 +339,25 @@ var app = {} || app;
 
     // Handler for hiding/showing a sidebar
     self.toggleSidebarHandler = function () {
-      if (self.toggleSidebar()) {
-        self.toggleSidebar(false);
+      self.toggleSidebar(!self.toggleSidebar());
+    };
+
+
+    // Filter all markers and places,
+    // Props to Sang: https://codepen.io/NKiD/pen/JRVZgv?editors=1010
+    self.placesListVisible = ko.computed(function () {
+      if (!self.filterInput()) {
+        return self.placesList();
       } else {
-        self.toggleSidebar(true);
+        return ko.utils.arrayFilter(self.placesList(), function (item) {
+          var visible = item.title().toLowerCase().indexOf(self.filterInput().toLowerCase()) !== -1;
+
+          item.marker.setVisible(visible);
+
+          return visible;
+        });
       }
-    };
-
-
-    // Filter all markers and places, remove all of them and then re-push only visible ones
-    self.filterPlacesList = function () {
-      var filterInput = self.filterInput().toLowerCase();
-
-      self.placesListVisible.removeAll();
-
-      self.placesList().forEach(function (place) {
-        place.marker.setVisible(false);
-
-        if (place.title().toLowerCase().indexOf(filterInput) !== -1) {
-          self.placesListVisible.push(place);
-        }
-      });
-
-      self.placesListVisible().forEach(function (place) {
-        place.marker.setVisible(true);
-      });
-    };
+    });
   };
 
 })();

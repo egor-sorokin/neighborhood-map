@@ -15,14 +15,11 @@
     </header>
 
     <div class="content">
-        <aside class="sidebar" data-bind="css: { 'hide': toggleSidebar() }">
+        <aside class="sidebar" data-bind="css: { 'show': toggleSidebar() }">
             <div class="sidebar__content">
                 <div class="sidebar__form form">
                     <div class="form__input-container">
-                        <input class="input" placeholder="Filter value..." data-bind="value: filterInput">
-                    </div>
-                    <div class="form__button-container">
-                        <button class="button" data-bind="click: filterPlacesList">Filter</button>
+                        <input class="input" placeholder="Filter value..." data-bind="textInput: filterInput">
                     </div>
                 </div>
                 <ul class="sidebar__list list" data-bind="foreach: placesListVisible">
@@ -32,13 +29,14 @@
                         <div class="list__item-description" data-bind="text: description"></div>
                     </li>
                 </ul>
-                <p id="request-error-message" class="error-message"></p>
+                <p class="error-message" data-bind="text: errorMessage"></p>
             </div>
-        </aside>
+        </aside>    <div id="map" class="map"></div>
 
-        <main class="main">
-            <div id="map" class="map"></div>
-        </main>
+
+
+
+
     </div>
 </div>
 
@@ -51,7 +49,7 @@
 
 <!-- Google maps -->
 <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing&key=AIzaSyA06zneEbM7ThTAoisy3cXHfuzRzRUHZSE&callback=app.initMap"
-        async defer></script>
+        async defer onerror="app.mapError()"></script>
 
 </body>
 </html>
