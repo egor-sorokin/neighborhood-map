@@ -52,7 +52,3 @@ After that you need to go to **app** directory and open index.html file
 [Online Markdown Editor]: https://dillinger.io/
 
 [Karol]: https://discussions.udacity.com/u/karol/summary
-
-
-
-
