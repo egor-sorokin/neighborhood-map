@@ -1,24 +1,30 @@
 //----------------------------------*\
 // SCSS MIXINS
 //----------------------------------*/
-@import 'mixins/breakpoints';
+@import 'mixins/_breakpoints';
 
 //----------------------------------*\
 // CONFIG MODULES
 //----------------------------------*/
 
 // Config modules
-@import 'modules/reset';
-@import 'modules/vars';
-@import 'modules/defaults';
-@import 'modules/normalize';
+@import 'modules/_reset';
+@import 'modules/_vars';
+@import 'modules/_defaults';
+@import 'modules/_normalize';
 
 //----------------------------------*\
 // PARTIALS
 //----------------------------------*/
 
-@import 'partials/header';
-@import 'partials/list';
+@import 'partials/_form';
+@import 'partials/_header';
+@import 'partials/_input';
+@import 'partials/_list';
+@import 'partials/_main';
+@import 'partials/_map';
+@import 'partials/_sidebar';
+@import 'partials/_info-window';
 
 //----------------------------------*\
 // OBJECTS & MODULES

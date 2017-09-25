@@ -1,27 +1,36 @@
+body {
+  display: flex;
+  flex-direction: column;
+}
+
 .header {
   overflow: hidden;
 
-  padding: 43px 0 23px;
+  padding: 20px 0;
 
-  @include breakpoint-tablet {
-    padding: 43px 0 23px;
-  }
+  min-height: 60px;
+
+  background-color: #3b383b;
+  border-bottom: 2px solid #000;
 
   &__menu {
-    float: left;
+    display: none;
 
-    position: relative;
-    top: 15px;
-    left: 0;
+    margin-left: 30px;
 
-    width: 55px;
-    height: 55px;
+    font-size: 18px;
+    color: #fff;
 
-    @include breakpoint-mobile {
-      width: 40px;
-      height: auto;
+    cursor: pointer;
 
-      top: 10px;
+    transition: color 0.5s ease;
+
+    &:hover {
+      color: #9B9B9B;
+    }
+
+    @include breakpoint-tablet {
+      display: inline-block;
     }
   }
 }

@@ -1,0 +1,8 @@
+.form {
+  display: flex;
+  flex-direction: row;
+
+  &__input-container {
+    flex-basis: 100%;
+  }
+}

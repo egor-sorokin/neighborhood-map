@@ -1,13 +1,13 @@
 {
-  "name": "fastshell",
-  "title": "Fiercely quick and opinionated front-ends",
-  "author": "Hossein Karami",
-  "url": "https://HosseinKarami.github.io/fastshell",
-  "version": "1.0.5",
-  "license": "MIT",
+  "name": "neighborhood-map",
+  "title": "",
+  "author": "",
+  "url": "",
+  "version": "",
+  "license": "",
   "repository": {
     "type": "git",
-    "url": "http://github.com/HosseinKarami/fastshell.git"
+    "url": ""
   },
   "devDependencies": {
     "browser-sync": "^2.11.1",

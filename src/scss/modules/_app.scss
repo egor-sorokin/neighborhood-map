@@ -1,0 +1,28 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+
+  min-height: 100vh;
+  height: 100%;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+
+  position: relative;
+
+  height: 100%;
+
+  @include breakpoint-tablet {
+    position: relative;
+  }
+}
+
+.error-message {
+  padding: 25px;
+
+  color: #c44349;
+  font-size: 16px;
+  text-align: center;
+}

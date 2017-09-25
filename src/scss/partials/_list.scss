@@ -1,0 +1,44 @@
+.list {
+  display: flex;
+  flex-direction: column;
+
+  &__item {
+    &-title {
+      padding: 15px 25px;
+
+      font-size: 18px;
+      color: #fff;
+
+      transition: background-color 0.5s ease,
+      color 0.5s ease;
+
+      cursor: pointer;
+
+      &:hover {
+        background-color: #2a2a2a;
+
+        color: #9B9B9B;
+      }
+    }
+    &-description {
+      display: none;
+
+      font-size: 14px;
+      color: #c2c2c2;
+    }
+
+    &.active {
+      background-color: #2a2a2a;
+
+      .list__item {
+        &-description {
+          display: block;
+
+          padding: 15px;
+
+          color: #9B9B9B;
+        }
+      }
+    }
+  }
+}
