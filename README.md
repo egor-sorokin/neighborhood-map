@@ -1,9 +1,9 @@
 # Neughborhood-map
 
 ## Description
-This is a final project of frontend part in Udacity Full Stack Nanodegree program
-These project displays five national parks in Canada on Google map
- and shows their description, also you can do next item: 
+This is a final project of frontend part in Udacity Full Stack Nanodegree program.
+
+These project displays five national parks in Canada on Google map and shows their description, also you can do next item: 
 1) see a street view of each park
 2) go to original Google maps and see more parks there
 3) filter parks and show only favourite ones 
